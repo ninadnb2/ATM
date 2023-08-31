@@ -9,23 +9,6 @@ class ATM {
     )
 
 
-    fun showAvailableDenominations() {
-        println("Current Available Denomination in Machine")
-        val maxLength = availableDenominations.keys.maxOrNull()?.toString()?.length ?: 0
-
-        for ((denomination, count) in availableDenominations) {
-            val denominationStr = denomination.toString()
-            val padding = " ".repeat(maxLength - denominationStr.length)
-            println("%-${maxLength}s\t$count".format("$denominationStr$padding"))
-        }
-
-        val totalValue = availableDenominations.entries.sumBy { (denomination, count) -> denomination * count }
-        val totalStr = "Total"
-        val totalPadding = " ".repeat(maxLength - totalStr.length + 1)  // Adjusted padding here
-        println("%-${maxLength}s\t$totalValue".format("$totalStr$totalPadding"))
-    }
-
-
     fun deposit(denomination: Int, numNotes: Int): String {
         val validDenominations = setOf(100, 200, 500, 2000)
 
@@ -43,11 +26,10 @@ class ATM {
             return "Invalid deposit amount. Amount should be a multiple of $denomination."
         }
 
-        availableDenominations[denomination] = availableDenominations.getOrDefault(denomination, 0) + numNotes
+        availableDenominations[denomination] =
+            availableDenominations.getOrDefault(denomination, 0) + numNotes
         return "Deposit successful. Denomination $denomination updated."
     }
-
-
 
 
     fun withdraw(amount: Int): Boolean {
@@ -79,20 +61,14 @@ class ATM {
         }
 
         for ((denomination, numNotes) in withdrawalDenominations) {
-            availableDenominations[denomination] = availableDenominations.getOrDefault(denomination, 0) - numNotes
+            availableDenominations[denomination] =
+                availableDenominations.getOrDefault(denomination, 0) - numNotes
         }
 
         return true  // Withdrawal successful
     }
 
-
-    fun getDenominationCount(): Map<Int, Int> {
-        return availableDenominations.toMap()
-    }
-
-
-
-fun getAvailableDenominationCount(denomination: Int): Int {
+    fun getAvailableDenominationCount(denomination: Int): Int {
         return availableDenominations.getOrDefault(denomination, 0)
     }
 
@@ -100,7 +76,4 @@ fun getAvailableDenominationCount(denomination: Int): Int {
         return availableDenominations.entries.sumBy { (denomination, count) -> denomination * count }
     }
 
-    fun getAvailableDenominations(): Map<Int, Int> {
-        return availableDenominations.toMap()
-    }
 }

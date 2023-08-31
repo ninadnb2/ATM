@@ -54,37 +54,14 @@ class MainActivity : AppCompatActivity() {
             if (anyDepositsMade) {
                 updateAvailableDenominations()
             } else {
-                Toast.makeText(this, "Please enter the number of notes to deposit", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Please enter the number of notes to deposit",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
-
-
-
-
-
-
-        /*  withdrawButton.setOnClickListener {
-              val withdrawEditText: EditText = findViewById(R.id.editTextWithdraw)
-              val withdrawalAmountStr = withdrawEditText.text.toString()
-
-              if (withdrawalAmountStr.isNotBlank()) {
-                  val withdrawalAmount = withdrawalAmountStr.toInt()
-
-                  val withdrawalSuccessful = atm.withdrawSeparateDenominations(withdrawalAmount)
-
-                  if (withdrawalSuccessful) {
-                      updateAvailableDenominations()
-                      withdrawEditText.text.clear()
-                  } else {
-                      // Show an error message or handle withdrawal failure
-                      Toast.makeText(this, "Withdrawal failed: Insufficient denominations available.", Toast.LENGTH_SHORT).show()
-                  }
-              } else {
-                  // Show an error message or handle the case when no withdrawal amount is entered
-                  Toast.makeText(this, "Please enter a withdrawal amount", Toast.LENGTH_SHORT).show()
-              }
-          }*/
         withdrawButton.setOnClickListener {
             val withdrawalEditText: EditText = findViewById(R.id.editTextWithdraw)
             val withdrawalText = withdrawalEditText.text.toString()
@@ -99,33 +76,17 @@ class MainActivity : AppCompatActivity() {
                     withdrawalEditText.text.clear()
                 } else {
                     // Handle withdrawal failure due to insufficient denominations
-                    Toast.makeText(this, "Withdrawal failed: Insufficient denominations available.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Withdrawal failed: Insufficient denominations available.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             } else {
                 // Handle the case when no withdrawal amount is entered
                 Toast.makeText(this, "Please enter a withdrawal amount", Toast.LENGTH_SHORT).show()
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         exitButton.setOnClickListener {
             finish()
@@ -145,12 +106,10 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     private fun updateTotalAvailableValue() {
         val totalValue = atm.getTotalAvailableValue()
         textTotal.text = totalValue.toString()
     }
-
 
 
     private fun getEditTextIdForDenomination(denomination: Int): Int {
